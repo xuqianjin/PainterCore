@@ -1,7 +1,9 @@
 import Pen from './lib/pen';
 import Downloader from './lib/downloader';
 
-const util = require('./lib/util');
+import util from './lib/util';
+import  './lib/qrcode';
+import  './lib/gradient';
 
 const downloader = new Downloader();
 
