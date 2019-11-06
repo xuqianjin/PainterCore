@@ -75,7 +75,7 @@ Component({
           getApp().systemInfo = wx.getSystemInfoSync();
         } catch (e) {
           const error = `Painter get system info failed, ${JSON.stringify(e)}`;
-          that.triggerEvent('imgErr', { error: error });
+          that.triggerEvent('imgerr', { error: error });
           console.error(error);
           return;
         }
@@ -172,7 +172,7 @@ Component({
           },
           fail: function (error) {
             console.error(`canvasToTempFilePath failed, ${JSON.stringify(error)}`);
-            that.triggerEvent('imgErr', { error: error });
+            that.triggerEvent('imgerr', { error: error });
           },
         }, this);
       }, 300);
@@ -186,12 +186,12 @@ Component({
           if (that.paintCount > MAX_PAINT_COUNT) {
             const error = `The result is always fault, even we tried ${MAX_PAINT_COUNT} times`;
             console.error(error);
-            that.triggerEvent('imgErr', { error: error });
+            that.triggerEvent('imgerr', { error: error });
             return;
           }
           // 比例相符时才证明绘制成功，否则进行强制重绘制
           if (Math.abs((infoRes.width * that.canvasHeightInPx - that.canvasWidthInPx * infoRes.height) / (infoRes.height * that.canvasHeightInPx)) < 0.01) {
-            that.triggerEvent('imgOK', { path: filePath });
+            that.triggerEvent('imgok', { path: filePath });
           } else {
             that.startPaint();
           }
@@ -199,7 +199,7 @@ Component({
         },
         fail: (error) => {
           console.error(`getImageInfo failed, ${JSON.stringify(error)}`);
-          that.triggerEvent('imgErr', { error: error });
+          that.triggerEvent('imgerr', { error: error });
         },
       });
     },
